@@ -134,13 +134,12 @@ nth = {
     "(5th)": 5,
 }
 
-genders = {"M": "M", "F": "F", "N": "N", "C": "C"}
-#genders = {
-#    "M": "masculine",
-#    "F": "feminine",
-#    "N": "neuter",
-#    "C": "common",
-#}
+genders = {
+    "M": "masculine",
+    "F": "feminine",
+    "N": "neuter",
+    "C": "common",
+}
 
 
 class WhitakerError(ValueError):
