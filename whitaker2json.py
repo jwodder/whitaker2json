@@ -206,6 +206,9 @@ def parse_header(header):
     if len(parts) == 2 and parts[1] == 'undeclined':
         parts.pop()
         verbum["undeclined"] = True
+    if len(parts) == 2 and parts[1] == 'abb.':
+        parts.pop()
+        verbum["abbreviation"] = True
     for f, field in zip(flags, ["age", "area", "geo", "frequency", "source"]):
         if f in dict_flags[field]:
             verbum[field] = dict_flags[field][f]
