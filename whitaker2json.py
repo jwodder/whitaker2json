@@ -143,18 +143,20 @@ genders = {
 
 
 class WhitakerError(ValueError):
-    pass
+    def __init__(self, header, msg):
+        self.header = header
+        self.msg = msg
+        super(WhitakerError, self).__init__('Could not parse header {!r}: {}'\
+                                            .format(header, msg))
 
 class UnknownFieldError(WhitakerError):
     def __init__(self, header, unk_type, unk_value):
         self.header = header
         self.unk_type = unk_type
         self.unk_value = unk_value
-        super(UnknownFieldError, self).__init__(header, unk_type, unk_value)
-
-    def __str__(self):
-        return 'Could not parse header {0.header!r}: unknown {0.unk_type}:' \
-               ' {0.unk_value!r}'.format(self)
+        super(UnknownFieldError, self).__init__(header, 'unknown {}: {!r}'\
+                                                        .format(unk_type,
+                                                                unk_value))
 
 
 def main():
@@ -182,8 +184,6 @@ def whitaker(fp):
         except Exception as e:
             print(repr(header), file=sys.stderr)
             raise
-        #    print('{0.__class__.__name__}: {0}: {1!r}'.format(e, header),
-        #          file=sys.stderr)
         else:
             verbum["definition"] = '; '.join(s[112:].lstrip('|').rstrip()
                                                     .rstrip(';') for s in lines)
@@ -193,7 +193,7 @@ def parse_header(header):
     m = re.search(r'^#(.+?)\s+(' + cls_rgx + r')\s+(.*?)\s+\[(\w{5})\] ::\s+$',
                   header)
     if not m:
-        raise WhitakerError(header)
+        raise WhitakerError(header, 'unknown format')
     parts, cls, classifiers, flags = m.groups()
     parts = [p if p != '-' else None for p in parts.split(', ')]
     classifiers = classifiers.split()
@@ -298,7 +298,7 @@ def parse_header(header):
         verbum["numeral adverb"] = [adv]
 
     elif cls != 'PRON' and len(parts) != 1:
-        raise WhitakerError(header)
+        raise WhitakerError(header, 'unexpected number of principal parts')
 
     verbum["parts"] = parts
     return verbum
