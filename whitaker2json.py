@@ -278,9 +278,17 @@ def parse_header(header):
         if "case" not in verbum:
             raise WhitakerError(header, 'no case specified for preposition')
 
-    elif cls == 'ADV' and len(parts) == 3:
-        verbum["superlative"] = [parts.pop()]
-        verbum["comparative"] = [parts.pop()]
+    elif cls == 'ADV':
+        if len(parts) == 3:
+            verbum["superlative"] = [parts.pop()]
+            verbum["comparative"] = [parts.pop()]
+        elif len(parts) == 2 and (parts[0] or '').endswith('ius') and \
+                (parts[1] or '').endswith('ime'):
+            verbum["superlative"] = [parts.pop()]
+            verbum["comparative"] = [parts.pop()]
+            parts = None
+        elif len(parts) != 1:
+            raise WhitakerError(header, 'unknown adverb format')
 
     elif cls == 'NUM' and len(parts) == 4:
         cardinal, ordinal, distributive, adv = parts
