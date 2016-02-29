@@ -266,13 +266,7 @@ def parse_header(header):
             verbum["superlative"] = superlative
 
     elif cls == 'PREP':
-        #classify(("case", cases))
-        if not classifiers:
-            raise WhitakerError(header)
-        elif classifiers[0] not in cases:
-            raise UnknownFieldError(header, 'preposition case', classifiers[0])
-        else:
-            verbum["case"] = cases[classifiers[0]]
+        classify(("case", cases))
 
     elif cls == 'ADV' and len(parts) == 3:
         verbum["superlative"] = [parts.pop()]
