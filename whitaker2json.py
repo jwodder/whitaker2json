@@ -222,6 +222,16 @@ def parse_header(header):
             raise UnknownFieldError(header, classes[cls] + ' classifier',
                                             classifiers[0])
 
+    def explode(entry, *endings, **kwargs):
+        abbrev = ' -'.join(endings)
+        if entry.endswith(abbrev):
+            stem = entry[:-len(abbrev)]
+            return [stem + e for e in endings]
+        elif 'or_bust' in kwargs:
+            raise UnknownFieldError(header, kwargs['or_bust'], entry)
+        else:
+            return None
+
     if cls == 'N':
         classify(("declension", nth), ("gender", genders))
         verbum.setdefault("declension", None)
@@ -241,26 +251,20 @@ def parse_header(header):
             del parts[1]
         elif len(parts) == 4:
             part1, part2, comparative, superlative = parts
-            if part2.endswith('a -um'):
-                parts = [part1, part2[:-4], part2[:-5] + 'um']
-            elif part2.endswith('is -e'):
-                parts = [part1, part2[:-3], part2[:-5] + 'e']
+
+            ps = explode(part2, 'a', 'um') or explode(part2, 'is', 'e')
+            if ps is not None:
+                parts = [part1] + ps
             elif part2.endswith(' (gen.)'):
                 parts = [part1, part2[:-7]]
             else:
                 parts = [part1, part2]
             if comparative is not None:
-                if comparative.endswith('or -or -us'):
-                    stem = comparative[:-10]
-                    comparative = [stem + 'or', stem + 'or', stem + 'us']
-                else:
-                    raise UnknownFieldError(header, 'comparative', comparative)
+                comparative = explode(comparative, 'or', 'or', 'us',
+                                      or_bust='comparative')
             if superlative is not None:
-                if superlative.endswith('us -a -um'):
-                    stem = superlative[:-9]
-                    superlative = [stem + 'us', stem + 'a', stem + 'um']
-                else:
-                    raise UnknownFieldError(header, 'superlative', superlative)
+                superlative = explode(superlative, 'us', 'a', 'um',
+                                      or_bust='superlative')
             verbum["comparative"] = comparative
             verbum["superlative"] = superlative
 
@@ -273,28 +277,14 @@ def parse_header(header):
 
     elif cls == 'NUM' and len(parts) == 4:
         cardinal, ordinal, distributive, adv = parts
-        if cardinal.endswith('i -ae -a'):
-            stem = cardinal[:-8]
-            parts = [stem + 'i', stem + 'ae', stem + 'a']
-        else:
-            parts = [cardinal]
-
-        if ordinal is None:
-            verbum["ordinal"] = None
-        elif ordinal.endswith('us -a -um'):
-            stem = ordinal[:-9]
-            verbum["ordinal"] = [stem + 'us', stem + 'a', stem + 'um']
-        else:
-            raise UnknownFieldError(header, 'ordinal', ordinal)
-
-        if distributive is None:
-            verbum["distributive"] = None
-        elif distributive.endswith('i -ae -a'):
-            stem = distributive[:-8]
-            verbum["distributive"] = [stem + 'i', stem + 'ae', stem + 'a']
-        else:
-            raise UnknownFieldError(header, 'distributive', distributive)
-
+        parts = explode(cardinal, 'i', 'ae', 'a') or [cardinal]
+        if ordinal is not None:
+            ordinal = explode(ordinal, 'us', 'a', 'um', or_bust='ordinal')
+        verbum["ordinal"] = ordinal
+        if distributive is not None:
+            distributive = explode(distributive, 'i', 'ae', 'a',
+                                   or_bust='distributive')
+        verbum["distributive"] = distributive
         verbum["numeral adverb"] = [adv]
 
     elif cls != 'PRON' and len(parts) != 1:
