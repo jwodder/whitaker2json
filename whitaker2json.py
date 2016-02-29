@@ -6,6 +6,7 @@ import codecs
 import itertools
 import json
 import re
+from   StringIO   import StringIO
 import sys
 
 dict_flags = {
@@ -165,11 +166,9 @@ def main():
     else:
         import requests
         import zipfile
-        r = requests.get('http://archives.nd.edu/whitaker/dictpage.zip',
-                         stream=True)
+        r = requests.get('http://archives.nd.edu/whitaker/dictpage.zip')
         r.raise_for_status()
-        zfp = zipfile.ZipFile(r.raw, 'r')
-        fp = zfp.open('DICTPAGE.RAW')
+        fp = zipfile.ZipFile(StringIO(r.content), 'r').open('DICTPAGE.RAW')
     ### Add an option for assuming the input is UTF-8
     with codecs.getreader('iso-8859-1')(fp) as verba:
         json.dump(list(whitaker(verba)), sys.stdout, sort_keys=True, indent=4,
