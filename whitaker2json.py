@@ -254,7 +254,6 @@ def parse_header(header):
             del parts[1]
         elif len(parts) == 4:
             part1, part2, comparative, superlative = parts
-
             ps = explode(part2, 'a', 'um') or explode(part2, 'is', 'e')
             if ps is not None:
                 parts = [part1] + ps
@@ -270,6 +269,9 @@ def parse_header(header):
                                       or_bust='superlative')
             verbum["comparative"] = comparative
             verbum["superlative"] = superlative
+        if parts[-1] is not None and parts[-1].endswith(' (gen -ius)'):
+            parts[-1] = parts[-1][:-11]
+            verbum.setdefault("notes", []).append("gen -ius")
 
     elif cls == 'PREP':
         classify(("case", cases))
