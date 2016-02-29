@@ -223,10 +223,14 @@ def parse_header(header):
 
     def explode(entry, *endings, **kwargs):
         abbrev = ' -'.join(endings)
-        if entry.endswith(abbrev):
-            stem = entry[:-len(abbrev)]
-            return [stem + e for e in endings]
-        elif 'or_bust' in kwargs:
+        while abbrev:
+            if entry.endswith(abbrev):
+                stem = entry[:-len(abbrev)]
+                return [stem + e for e in endings]
+            elif len(entry) != 24:
+                break
+            abbrev = abbrev[:-1]
+        if 'or_bust' in kwargs:
             raise UnknownFieldError(header, kwargs['or_bust'], entry)
         else:
             return None
