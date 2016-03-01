@@ -1,0 +1,5 @@
+- Be able to handle all entries currently in `DICTPAGE.RAW`
+- Add an option for treating the input file as UTF-8 instead of Latin-1
+- Add an `-o/--outfile` option
+- Add the ability to convert `dictline.gen` to JSON
+- Write a README
