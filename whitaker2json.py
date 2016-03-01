@@ -305,6 +305,10 @@ def parse_header(header):
     elif cls != 'PRON' and len(parts) != 1:
         raise WhitakerError(header, 'unexpected number of principal parts')
 
+    elif classifiers:
+        raise UnknownFieldError(header, classes[cls] + ' classifier',
+                                classifiers[0])
+
     verbum["parts"] = parts
     return verbum
 
