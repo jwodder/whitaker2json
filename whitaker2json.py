@@ -122,6 +122,7 @@ verb_types = {
     "INTRANS": "intransitive",
     "IMPERS": "impersonal",
     "DAT": "w/dative",
+    "ABL": "w/ablative",
     "DEP": "deponent",
     "SEMIDEP": "semideponent",
     "PERFDEF": "perfect definite",
@@ -140,6 +141,7 @@ genders = {
     "F": "feminine",
     "N": "neuter",
     "C": "common",
+    "X": "unknown",
 }
 
 
