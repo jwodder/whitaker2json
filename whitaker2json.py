@@ -144,6 +144,17 @@ genders = {
     "X": "unknown",
 }
 
+pronoun_types = {
+    "X": "unknown",
+    "PERS": "personal",
+    "REL": "relative",
+    "REFLEX": "reflexive",
+    "DEMONS": "demonstrative",
+    "INTERR": "interrogative",
+    "INDEF":  "indefinite",
+    "ADJECT": "adjectival",
+}
+
 
 class WhitakerError(ValueError):
     def __init__(self, header, msg):
@@ -304,7 +315,13 @@ def parse_header(header):
         verbum["distributive"] = distributive
         verbum["numeral adverb"] = [adv]
 
-    elif cls != 'PRON' and len(parts) != 1:
+    elif cls == 'PRON':
+        classify(("type", pronoun_types))
+        if len(parts) == 1 and parts[0].endswith(' (GEN)'):
+            parts[0] = parts[0][:-6]
+            verbum["genitive"] = True
+
+    elif len(parts) != 1:
         raise WhitakerError(header, 'unexpected number of principal parts')
 
     elif classifiers:
