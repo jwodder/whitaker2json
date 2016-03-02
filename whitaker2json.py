@@ -213,6 +213,7 @@ def parse_header(header):
         raise UnknownFieldError(header, 'part of speech', cls)
     verbum = {
         "class": classes[cls],
+        "class_code": cls,
     }
     if len(parts) == 2 and parts[1] == 'undeclined':
         parts.pop()
@@ -223,13 +224,16 @@ def parse_header(header):
     for f, field in zip(flags, ["age", "area", "geo", "frequency", "source"]):
         if f in dict_flags[field]:
             verbum[field] = dict_flags[field][f]
+            verbum[field + "_code"] = f
         else:
             raise UnknownFieldError(header, field + ' flag', f)
 
     def classify(*classifications):
         for field, lookup in classifications:
             if classifiers and classifiers[0] in lookup:
-                verbum[field] = lookup[classifiers.pop(0)]
+                code = classifiers.pop(0)
+                verbum[field] = lookup[code]
+                verbum[field + "_code"] = code
         if classifiers:
             raise UnknownFieldError(header, classes[cls] + ' classifier',
                                             classifiers[0])

@@ -3,3 +3,5 @@
 - Add an `-o/--outfile` option
 - Add the ability to convert `dictline.gen` to JSON
 - Write a README
+- Let the user pass the zipfile on the command line?
+- Add a JSON Schema for the output format?
