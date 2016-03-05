@@ -105,6 +105,7 @@ classes = {
     "INTERJ": "interjection",
     "N": "noun",
     "NUM": "number",
+    "PACK": "PACKON",
     "PREP": "preposition",
     "PRON": "pronoun",
     "V": "verb",
@@ -216,10 +217,12 @@ def parse_header(header):
     classifiers = classifiers.split()
     if cls not in classes:
         raise UnknownFieldError(header, 'part of speech', cls)
-    verbum = {
-        "class": classes[cls],
-        "class_code": cls,
-    }
+    verbum = dict()
+    if cls == "PACK":
+        cls = "PRON"
+        verbum["PACK"] = True
+    verbum["class"] = classes[cls]
+    verbum["class_code"] = cls
     if len(parts) == 2 and parts[1] == 'undeclined':
         parts.pop()
         verbum["undeclined"] = True
