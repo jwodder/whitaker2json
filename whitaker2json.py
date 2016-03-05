@@ -142,11 +142,11 @@ genders = {
     "F": "feminine",
     "N": "neuter",
     "C": "common",
-    "X": "unknown",
+    "X": None,
 }
 
 pronoun_types = {
-    "X": "unknown",
+    "X": None,
     "PERS": "personal",
     "REL": "relative",
     "REFLEX": "reflexive",
