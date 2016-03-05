@@ -8,6 +8,7 @@ import json
 import re
 from   StringIO   import StringIO
 import sys
+import zipfile
 
 dict_flags = {
     "age": {
@@ -175,10 +176,12 @@ class UnknownFieldError(WhitakerError):
 
 def main():
     if len(sys.argv) > 1:
-        fp = open(sys.argv[1])
+        if sys.argv[1].lower().endswith('.zip'):
+            fp = zipfile.ZipFile(sys.argv[1], 'r').open('DICTPAGE.RAW')
+        else:
+            fp = open(sys.argv[1])
     else:
         import requests
-        import zipfile
         r = requests.get('http://archives.nd.edu/whitaker/dictpage.zip')
         r.raise_for_status()
         fp = zipfile.ZipFile(StringIO(r.content), 'r').open('DICTPAGE.RAW')

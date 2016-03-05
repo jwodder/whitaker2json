@@ -1,7 +1,10 @@
 - Be able to handle all entries currently in `DICTPAGE.RAW`
 - Add an option for treating the input file as UTF-8 instead of Latin-1
 - Add an `-o/--outfile` option
-- Add the ability to convert `dictline.gen` to JSON
+- Add the ability to convert `DICTLINE.GEN` to JSON
 - Write a README
-- Let the user pass the zipfile on the command line?
 - Add a JSON Schema for the output format?
+- Rename the "undeclined" field to something that also applies to verbs
+- Make sure the code is compatible with both Python 2 and Python 3
+- Add an option for specifying the name of the file within the zipfile?
+- Add an option for specifying the URL of the zipfile?
