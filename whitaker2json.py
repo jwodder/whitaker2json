@@ -2,6 +2,7 @@
 # Input: DICTPAGE.RAW from <http://archives.nd.edu/whitaker/dictpage.zip>
 # cf. <http://archives.nd.edu/whitaker/wordsdoc.htm>
 from   __future__ import print_function
+import argparse
 import codecs
 import itertools
 import json
@@ -176,7 +177,12 @@ class UnknownFieldError(WhitakerError):
 
 
 def main():
-    if len(sys.argv) == 1:
+    parser = argparse.ArgumentParser()
+    parser.add_argument('-o', '--outfile', type=argparse.FileType('w'),
+                        default=sys.stdout)
+    parser.add_argument('infile', type=argparse.FileType('r'), nargs='?')
+    args = parser.parse_args()
+    if args.infile is None:
         try:
             import requests
         except ImportError:
@@ -185,12 +191,12 @@ def main():
         r = requests.get('http://archives.nd.edu/whitaker/dictpage.zip')
         r.raise_for_status()
         fp = zipfile.ZipFile(StringIO(r.content), 'r').open('DICTPAGE.RAW')
-    elif sys.argv[1].lower().endswith('.zip'):
-        fp = zipfile.ZipFile(sys.argv[1], 'r').open('DICTPAGE.RAW')
+    elif args.infile.name.lower().endswith('.zip'):
+        fp = zipfile.ZipFile(args.infile, 'r').open('DICTPAGE.RAW')
     else:
-        fp = open(sys.argv[1])
+        fp = args.infile
     with codecs.getreader('iso-8859-1')(fp) as verba:
-        json.dump(list(whitaker(verba)), sys.stdout, sort_keys=True, indent=4,
+        json.dump(list(whitaker(verba)), args.outfile, sort_keys=True, indent=4,
                   separators=(',', ': '))
 
 def whitaker(fp):
