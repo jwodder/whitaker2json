@@ -6,7 +6,6 @@
     - `#tres -es -ia, tertius -a -um, terni -ae -a, ter  NUM`
     - `#ulterior -or -us, ultimus -a -um  ADJ`
     - `#unus -a -um, primus -a -um, singuli -ae -a, semel  NUM`
-- Add an option for treating the input file as UTF-8 instead of Latin-1
 - Add the ability to convert `DICTLINE.GEN` to JSON
 - Write a README
 - Add a JSON Schema for the output format?

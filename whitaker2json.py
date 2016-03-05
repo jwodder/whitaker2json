@@ -180,6 +180,7 @@ def main():
     parser = argparse.ArgumentParser()
     parser.add_argument('-o', '--outfile', type=argparse.FileType('w'),
                         default=sys.stdout)
+    parser.add_argument('-U', '--utf8', action='store_true')
     parser.add_argument('infile', type=argparse.FileType('r'), nargs='?')
     args = parser.parse_args()
     if args.infile is None:
@@ -195,7 +196,7 @@ def main():
         fp = zipfile.ZipFile(args.infile, 'r').open('DICTPAGE.RAW')
     else:
         fp = args.infile
-    with codecs.getreader('iso-8859-1')(fp) as verba:
+    with codecs.getreader('utf-8' if args.utf8 else 'iso-8859-1')(fp) as verba:
         json.dump(list(whitaker(verba)), args.outfile, sort_keys=True, indent=4,
                   separators=(',', ': '))
 
