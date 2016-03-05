@@ -293,7 +293,7 @@ def parse_header(header):
             verbum["superlative"] = superlative
         if parts[-1] is not None and parts[-1].endswith(' (gen -ius)'):
             parts[-1] = parts[-1][:-11]
-            verbum.setdefault("notes", []).append("gen -ius")
+            verbum["gen_ius"] = True
 
     elif cls == 'PREP':
         classify(("case", cases))
