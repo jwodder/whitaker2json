@@ -1,4 +1,11 @@
 - Be able to handle all entries currently in `DICTPAGE.RAW`
+- Entries that are currently not handled correctly:
+    - `#curotrophoe F ADJ`
+    - `#deterior -or -us, deterrimus -a -um  ADJ`
+    - `#duo -ae o, secundus -a -um, bini -ae -a, bis  NUM`
+    - `#tres -es -ia, tertius -a -um, terni -ae -a, ter  NUM`
+    - `#ulterior -or -us, ultimus -a -um  ADJ`
+    - `#unus -a -um, primus -a -um, singuli -ae -a, semel  NUM`
 - Add an option for treating the input file as UTF-8 instead of Latin-1
 - Add an `-o/--outfile` option
 - Add the ability to convert `DICTLINE.GEN` to JSON
