@@ -333,7 +333,10 @@ def parse_header(header):
 
     elif cls == 'NUM' and len(parts) == 4:
         cardinal, ordinal, distributive, adv = parts
-        parts = explode(cardinal, 'i', 'ae', 'a') or [cardinal]
+        parts = explode(cardinal, 'i', 'ae', 'a') or \
+                explode(cardinal, 'us', 'a', 'um') or \
+                explode(cardinal, 'es', 'es', 'ia') or \
+                [cardinal]
         if ordinal is not None:
             ordinal = explode(ordinal, 'us', 'a', 'um', or_bust='ordinal')
         verbum["ordinal"] = ordinal

@@ -2,8 +2,6 @@
 - Entries that are currently not handled correctly:
     - `#curotrophoe F ADJ`
     - `#duo -ae o, secundus -a -um, bini -ae -a, bis  NUM`
-    - `#tres -es -ia, tertius -a -um, terni -ae -a, ter  NUM`
-    - `#unus -a -um, primus -a -um, singuli -ae -a, semel  NUM`
 - Add the ability to convert `DICTLINE.GEN` to JSON
 - Write a README
 - Add a JSON Schema for the output format?
@@ -14,3 +12,4 @@
 - Find a better term for "parts"?
 - Add an option/options for controlling what to do about unparseable lines:
   error out or log them somewhere
+- Should the "(gen.)" in adjective headers be preserved somehow?
