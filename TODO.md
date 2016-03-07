@@ -1,10 +1,8 @@
 - Be able to handle all entries currently in `DICTPAGE.RAW`
 - Entries that are currently not handled correctly:
     - `#curotrophoe F ADJ`
-    - `#deterior -or -us, deterrimus -a -um  ADJ`
     - `#duo -ae o, secundus -a -um, bini -ae -a, bis  NUM`
     - `#tres -es -ia, tertius -a -um, terni -ae -a, ter  NUM`
-    - `#ulterior -or -us, ultimus -a -um  ADJ`
     - `#unus -a -um, primus -a -um, singuli -ae -a, semel  NUM`
 - Add the ability to convert `DICTLINE.GEN` to JSON
 - Write a README
@@ -14,3 +12,5 @@
 - Add an option for specifying the name of the file within the zipfile?
 - Add an option for specifying the URL of the zipfile?
 - Find a better term for "parts"?
+- Add an option/options for controlling what to do about unparseable lines:
+  error out or log them somewhere

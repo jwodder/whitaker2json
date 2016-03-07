@@ -282,7 +282,16 @@ def parse_header(header):
             verbum["type"] = "impersonal perfect definite"
 
     elif cls == 'ADJ':
-        if len(parts) == 3 and parts[1] == '(gen.)':
+        if len(parts) == 2:
+            p0 = explode(parts[0], 'or', 'or', 'us')
+            p1 = explode(parts[1], 'us', 'a', 'um')
+            if p0 is not None and p1 is not None:
+                parts = None
+                verbum["comparative"] = p0
+                verbum["superlative"] = p1
+            elif p0 is not None or p1 is not None:
+                raise WhitakerError(header, 'unknown adjective format')
+        elif len(parts) == 3 and parts[1] == '(gen.)':
             del parts[1]
         elif len(parts) == 4:
             part1, part2, comparative, superlative = parts
@@ -301,7 +310,7 @@ def parse_header(header):
                                       or_bust='superlative')
             verbum["comparative"] = comparative
             verbum["superlative"] = superlative
-        if parts[-1] is not None and parts[-1].endswith(' (gen -ius)'):
+        if parts is not None and (parts[-1] or '').endswith(' (gen -ius)'):
             parts[-1] = parts[-1][:-11]
             verbum["gen_ius"] = True
 
