@@ -1,7 +1,6 @@
 - Be able to handle all entries currently in `DICTPAGE.RAW`
 - Entries that are currently not handled correctly:
     - `#curotrophoe F ADJ`
-    - `#duo -ae o, secundus -a -um, bini -ae -a, bis  NUM`
 - Add the ability to convert `DICTLINE.GEN` to JSON
 - Write a README
 - Add a JSON Schema for the output format?

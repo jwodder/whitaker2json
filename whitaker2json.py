@@ -259,6 +259,9 @@ def parse_header(header):
             if entry.endswith(abbrev):
                 stem = entry[:-len(abbrev)]
                 return [stem + e for e in endings]
+            elif abbrev == 'o -ae -o':
+                # Match "duo -ae o"
+                abbrev = 'o -ae oX'
             elif len(entry) != 24:
                 break
             abbrev = abbrev[:-1]
@@ -335,6 +338,7 @@ def parse_header(header):
         cardinal, ordinal, distributive, adv = parts
         parts = explode(cardinal, 'i', 'ae', 'a') or \
                 explode(cardinal, 'us', 'a', 'um') or \
+                explode(cardinal, 'o', 'ae', 'o') or \
                 explode(cardinal, 'es', 'es', 'ia') or \
                 [cardinal]
         if ordinal is not None:
