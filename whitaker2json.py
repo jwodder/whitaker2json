@@ -210,8 +210,9 @@ def whitaker(fp, error_file=None):
             if error_file is not None:
                 for s in lines:
                     print(s, end='', file=error_file)
-        except Exception as e:
-            print(repr(header), file=sys.stderr)
+        except Exception:
+            print('Unexpected error while parsing header', repr(header),
+                  file=sys.stderr)
             raise
         else:
             verbum["definition"] = '; '.join(s[112:].lstrip('|').rstrip()
