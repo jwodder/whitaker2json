@@ -9,6 +9,7 @@
 - Add an option for specifying the name of the file within the zipfile?
 - Add an option for specifying the URL of the zipfile?
 - Find a better term for "parts"?
-- Add an option/options for controlling what to do about unparseable lines:
-  error out or log them somewhere
 - Should the "(gen.)" in adjective headers be preserved somehow?
+- Add an option for specifying the maximum field width? (currently 24; used for
+  determining when abbreviated endings may have been truncated)
+- Automatically determine header length by searching for [XXXXX] flags

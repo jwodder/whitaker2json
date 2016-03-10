@@ -181,6 +181,7 @@ def main():
     parser.add_argument('-o', '--outfile', type=argparse.FileType('w'),
                         default=sys.stdout)
     parser.add_argument('-U', '--utf8', action='store_true')
+    parser.add_argument('-E', '--error-file', type=argparse.FileType('w'))
     parser.add_argument('infile', type=argparse.FileType('r'), nargs='?')
     args = parser.parse_args()
     if args.infile is None:
@@ -197,15 +198,18 @@ def main():
     else:
         fp = args.infile
     with codecs.getreader('utf-8' if args.utf8 else 'iso-8859-1')(fp) as verba:
-        json.dump(list(whitaker(verba)), args.outfile, sort_keys=True, indent=4,
-                  separators=(',', ': '))
+        json.dump(list(whitaker(verba, args.error_file)), args.outfile,
+                  sort_keys=True, indent=4, separators=(',', ': '))
 
-def whitaker(fp):
+def whitaker(fp, error_file=None):
     for header, lines in itertools.groupby(fp, lambda s: s[:112]):
         try:
             verbum = parse_header(header)
         except WhitakerError as e:
             print(e, file=sys.stderr)
+            if error_file is not None:
+                for s in lines:
+                    print(s, end='', file=error_file)
         except Exception as e:
             print(repr(header), file=sys.stderr)
             raise
