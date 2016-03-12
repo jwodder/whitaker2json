@@ -13,5 +13,4 @@
 - Add an option for specifying the maximum field width? (currently 24; used for
   determining when abbreviated endings may have been truncated)
 - Automatically determine header length by searching for [XXXXX] flags
-- Add an option for silencing the display of reasons why unparseable headers
-  are unparseable?
+- Exit with a failure status if any lines were unparseable
