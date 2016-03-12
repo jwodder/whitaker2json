@@ -202,8 +202,20 @@ def main():
         json.dump(list(whitaker(verba, args.error_file, args.quiet)),
                   args.outfile, sort_keys=True, indent=4, separators=(',',': '))
 
+def decapitate(line):
+    m = re.search(r'\s+\[(\w{5})\]\s+::\s+', line)
+    return line[:m.end()] if m else None
+
 def whitaker(fp, error_file=None, quiet=False):
-    for header, lines in itertools.groupby(fp, lambda s: s[:112]):
+    for header, lines in itertools.groupby(fp, decapitate):
+        if header is None:
+            for s in lines:
+                if not quiet:
+                    print('Could not locate end of header in line', repr(s),
+                          file=sys.stderr)
+                if error_file is not None:
+                    print(s, end='', file=error_file)
+            continue
         try:
             verbum = parse_header(header)
         except WhitakerError as e:
@@ -217,8 +229,10 @@ def whitaker(fp, error_file=None, quiet=False):
                   file=sys.stderr)
             raise
         else:
-            verbum["definition"] = '; '.join(s[112:].lstrip('|').rstrip()
-                                                    .rstrip(';') for s in lines)
+            verbum["definition"] = '; '.join(s[len(header):].lstrip('|')
+                                                            .rstrip()
+                                                            .rstrip(';')
+                                             for s in lines)
             yield verbum
 
 def parse_header(header):
