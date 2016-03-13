@@ -7,7 +7,6 @@
 - Rename the "undeclined" field to something that also applies to verbs
 - Make sure the code is compatible with both Python 2 and Python 3
 - Add an option for specifying the name of the file within the zipfile?
-- Add an option for specifying the URL of the zipfile?
 - Find a better term for "parts"?
 - Should the "(gen.)" in adjective headers be preserved somehow?
 - Add an option for specifying the maximum field width? (currently 24; used for

@@ -178,11 +178,13 @@ class UnknownFieldError(WhitakerError):
 
 def main():
     parser = argparse.ArgumentParser()
+    parser.add_argument('-E', '--error-file', type=argparse.FileType('w'))
     parser.add_argument('-o', '--outfile', type=argparse.FileType('w'),
                         default=sys.stdout)
-    parser.add_argument('-U', '--utf8', action='store_true')
-    parser.add_argument('-E', '--error-file', type=argparse.FileType('w'))
     parser.add_argument('-q', '--quiet', action='store_true')
+    parser.add_argument('-U', '--utf8', action='store_true')
+    parser.add_argument('-z', '--zip-url',
+                        default='http://archives.nd.edu/whitaker/dictpage.zip')
     parser.add_argument('infile', type=argparse.FileType('r'), nargs='?')
     args = parser.parse_args()
     if args.infile is None:
@@ -191,7 +193,7 @@ def main():
         except ImportError:
             raise SystemExit('Downloading dictpage.zip requires the `requests`'
                              ' module:\n    sudo pip install requests')
-        r = requests.get('http://archives.nd.edu/whitaker/dictpage.zip')
+        r = requests.get(args.zip_url)
         r.raise_for_status()
         fp = zipfile.ZipFile(StringIO(r.content), 'r').open('DICTPAGE.RAW')
     elif args.infile.name.lower().endswith('.zip'):
