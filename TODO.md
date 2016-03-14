@@ -4,7 +4,6 @@
 - Add the ability to convert `DICTLINE.GEN` to JSON
 - Write a README
 - Add a JSON Schema for the output format?
-- Rename the "undeclined" field to something that also applies to verbs
 - Make sure the code is compatible with both Python 2 and Python 3
 - Add an option for specifying the name of the file within the zipfile?
 - Find a better term for "parts"?
