@@ -300,15 +300,12 @@ def parse_header(header):
 
     if cls == 'N':
         classify(("declension", nth), ("gender", genders))
-        verbum.setdefault("declension", None)
         verbum.pop("declension_code", None)
 
     elif cls == 'V':
         classify(("conjugation", nth), ("type", verb_types))
-        verbum.setdefault("conjugation", None)
-        verbum.setdefault("type", None)
         verbum.pop("conjugation_code", None)
-        if verbum["type"] == verb_types["IMPERS"] and len(parts) == 3 and \
+        if verbum.get("type") == verb_types["IMPERS"] and len(parts) == 3 and \
                 parts[0].endswith('it') and \
                 parts[1] is not None and parts[1].endswith('isse') and \
                 (parts[2] is None or parts[2].endswith(' est')):
