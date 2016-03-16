@@ -185,6 +185,7 @@ def main():
     parser.add_argument('-U', '--utf8', action='store_true')
     parser.add_argument('-z', '--zip-url',
                         default='http://archives.nd.edu/whitaker/dictpage.zip')
+    parser.add_argument('-Z', '--zip-path', default='DICTPAGE.RAW')
     parser.add_argument('infile', type=argparse.FileType('r'), nargs='?')
     args = parser.parse_args()
     if args.infile is None:
@@ -195,9 +196,9 @@ def main():
                              ' module:\n    sudo pip install requests')
         r = requests.get(args.zip_url)
         r.raise_for_status()
-        fp = zipfile.ZipFile(StringIO(r.content), 'r').open('DICTPAGE.RAW')
+        fp = zipfile.ZipFile(StringIO(r.content), 'r').open(args.zip_path)
     elif args.infile.name.lower().endswith('.zip'):
-        fp = zipfile.ZipFile(args.infile, 'r').open('DICTPAGE.RAW')
+        fp = zipfile.ZipFile(args.infile, 'r').open(args.zip_path)
     else:
         fp = args.infile
     with codecs.getreader('utf-8' if args.utf8 else 'iso-8859-1')(fp) as verba:
