@@ -115,9 +115,13 @@ classes = {
 cls_rgx = r'(?:' + '|'.join(classes.keys()) + ')'
 
 cases = {
-    "ABL": "ablative",
-    "ACC": "accusative",
+    "NOM": "nominative",
     "GEN": "genitive",
+    "DAT": "dative",
+    "ACC": "accusative",
+    "ABL": "ablative",
+    "VOC": "vocative",
+    "LOC": "locative",
 }
 
 verb_types = {
@@ -145,6 +149,11 @@ genders = {
     "N": "neuter",
     "C": "common",
     "X": None,
+}
+
+numbers = {
+    "S": "singular",
+    "P": "plural",
 }
 
 pronoun_types = {
@@ -300,8 +309,17 @@ def parse_header(header):
             return None
 
     if cls == 'N':
-        classify(("declension", nth), ("gender", genders))
-        verbum.pop("declension_code", None)
+        if len(parts) == 1 and len(classifiers) == 5 and \
+                re.search(r'^\d+$', classifiers[0]):
+            verbum["inflected"] = True
+            verbum["declension"] = int(classifiers[0])
+            verbum["variant"] = int(classifiers[1])
+            verbum["case"] = cases[classifiers[2]]
+            verbum["number"] = numbers[classifiers[3]]
+            verbum["gender"] = genders[classifiers[4]]
+        else:
+            classify(("declension", nth), ("gender", genders))
+            verbum.pop("declension_code", None)
 
     elif cls == 'V':
         classify(("conjugation", nth), ("type", verb_types))

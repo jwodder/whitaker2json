@@ -10,3 +10,7 @@
 - Add an option for specifying the maximum field width? (currently 24; used for
   determining when abbreviated endings may have been truncated)
 - Exit with a failure status if any lines were unparseable
+- Rename "inflectable" and "inflected" to something less likely to cause
+  confusion
+- Add fancy error checking & error messages for malformed inflected word
+  entries
