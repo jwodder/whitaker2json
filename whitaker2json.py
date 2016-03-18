@@ -392,10 +392,19 @@ def parse_header(header):
         verbum["numeral adverb"] = [adv]
 
     elif cls == 'PRON':
-        classify(("type", pronoun_types))
-        if len(parts) == 1 and parts[0].endswith(' (GEN)'):
-            parts[0] = parts[0][:-6]
-            verbum["genitive"] = True
+        if len(parts) == 1 and len(classifiers) == 5 and \
+                re.search(r'^\d+$', classifiers[0]):
+            verbum["inflected"] = True
+            verbum["declension"] = int(classifiers[0])
+            verbum["variant"] = int(classifiers[1])
+            verbum["case"] = cases[classifiers[2]]
+            verbum["number"] = numbers[classifiers[3]]
+            verbum["gender"] = genders[classifiers[4]]
+        else:
+            classify(("type", pronoun_types))
+            if len(parts) == 1 and parts[0].endswith(' (GEN)'):
+                parts[0] = parts[0][:-6]
+                verbum["genitive"] = True
 
     elif len(parts) != 1:
         raise WhitakerError(header, 'unexpected number of principal parts')
