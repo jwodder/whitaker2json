@@ -1,5 +1,6 @@
 - Be able to handle all entries currently in `DICTPAGE.RAW`
 - Entries that are currently not handled correctly:
+    - `#colossicon  N ADJ`
     - `#curotrophoe F ADJ`
 - Add the ability to convert `DICTLINE.GEN` to JSON
 - Write a README

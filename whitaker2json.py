@@ -135,6 +135,30 @@ verb_types = {
     "PERFDEF": "perfect definite",
 }
 
+tenses = {
+    "PRES": "present",
+    "IMPF": "imperfect",
+    "FUT": "future",
+    "PERF": "perfect",
+    "PLUP": "pluperfect",
+    "FUTP": "future perfect",
+    "X": None,
+}
+
+voices = {
+    "ACTIVE": "active",
+    "PASSIVE": "passive",
+}
+
+moods = {
+    "IND": "indicative",
+    "SUB": "subjunctive",
+    "IMP": "imperative",
+    "INF": "infinitive",
+    "PPL": "participle",
+    "X": None,
+}
+
 nth = {
     "(1st)": 1,
     "(2nd)": 2,
@@ -154,6 +178,7 @@ genders = {
 numbers = {
     "S": "singular",
     "P": "plural",
+    "X": None,
 }
 
 pronoun_types = {
@@ -320,8 +345,17 @@ def parse_header(header):
             verbum.pop("declension_code", None)
 
     elif cls == 'V':
-        classify(("conjugation", nth), ("type", verb_types))
-        verbum.pop("conjugation_code", None)
+        if len(parts) == 1 and len(classifiers) in (7,8) and \
+                re.search(r'^\d+$', classifiers[0]):
+            verbum["inflected"] = True
+            verbum["conjugation"] = int(classifiers.pop(0))
+            verbum["variant"] = int(classifiers.pop(0))
+            verbum["person"] = int(classifiers.pop(3)) or None
+            classify(("tense", tenses), ("voice", voices), ("mood", moods),
+                     ("number", numbers), ("type", verb_types))
+        else:
+            classify(("conjugation", nth), ("type", verb_types))
+            verbum.pop("conjugation_code", None)
 
     elif cls == 'ADJ':
         if len(parts) == 2:
