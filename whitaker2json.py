@@ -324,11 +324,6 @@ def parse_header(header):
     elif cls == 'V':
         classify(("conjugation", nth), ("type", verb_types))
         verbum.pop("conjugation_code", None)
-        if verbum.get("type") == verb_types["IMPERS"] and len(parts) == 3 and \
-                parts[0].endswith('it') and \
-                parts[1] is not None and parts[1].endswith('isse') and \
-                (parts[2] is None or parts[2].endswith(' est')):
-            verbum["type"] = "impersonal perfect definite"
 
     elif cls == 'ADJ':
         if len(parts) == 2:
