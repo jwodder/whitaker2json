@@ -312,11 +312,9 @@ def parse_header(header):
         if len(parts) == 1 and len(classifiers) == 5 and \
                 re.search(r'^\d+$', classifiers[0]):
             verbum["inflected"] = True
-            verbum["declension"] = int(classifiers[0])
-            verbum["variant"] = int(classifiers[1])
-            verbum["case"] = cases[classifiers[2]]
-            verbum["number"] = numbers[classifiers[3]]
-            verbum["gender"] = genders[classifiers[4]]
+            verbum["declension"] = int(classifiers.pop(0))
+            verbum["variant"] = int(classifiers.pop(0))
+            classify(("case", cases), ("number", numbers), ("gender", genders))
         else:
             classify(("declension", nth), ("gender", genders))
             verbum.pop("declension_code", None)
@@ -395,11 +393,9 @@ def parse_header(header):
         if len(parts) == 1 and len(classifiers) == 5 and \
                 re.search(r'^\d+$', classifiers[0]):
             verbum["inflected"] = True
-            verbum["declension"] = int(classifiers[0])
-            verbum["variant"] = int(classifiers[1])
-            verbum["case"] = cases[classifiers[2]]
-            verbum["number"] = numbers[classifiers[3]]
-            verbum["gender"] = genders[classifiers[4]]
+            verbum["declension"] = int(classifiers.pop(0))
+            verbum["variant"] = int(classifiers.pop(0))
+            classify(("case", cases), ("number", numbers), ("gender", genders))
         else:
             classify(("type", pronoun_types))
             if len(parts) == 1 and parts[0].endswith(' (GEN)'):
