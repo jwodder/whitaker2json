@@ -6,7 +6,7 @@
 - Write a README
 - Add a JSON Schema for the output format?
 - Make sure the code is compatible with both Python 2 and Python 3
-- Find a better term for "parts"?
+- Find a better term for "parts"
 - Should the "(gen.)" in adjective headers be preserved somehow?
 - Add an option for specifying the maximum field width? (currently 24; used for
   determining when abbreviated endings may have been truncated)
@@ -15,7 +15,10 @@
   confusion
 - Add fancy error checking & error messages for malformed inflected word
   entries
-- Replace `<FLAG>` and `<FLAG>_code` fields with a single field per flag that
-  maps to a dict with `code` and `name` (`value`?) fields?
 - Make a gh-pages site describing the formats of Words' datafiles, including
   declension/conjugation variant numbers
+- Make "numeral adverb" a string instead of a list?
+- For adjectives & adverbs, merge "parts", "comparative", and "superlative"
+  into a single `"parts": {"positive": ..., "comparative": ..., "superlative":
+  ...}` field?
+    - Do the same for numbers?

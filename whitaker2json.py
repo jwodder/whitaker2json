@@ -282,9 +282,9 @@ def parse_header(header):
     classifiers = classifiers.split()
     if cls not in classes:
         raise UnknownFieldError(header, 'part of speech', cls)
-    verbum = dict()
-    verbum["class"] = classes[cls]
-    verbum["class_code"] = cls
+    verbum = {
+        "class": {"code": cls, "value": classes[cls]},
+    }
     if len(parts) == 2 and parts[1] == 'undeclined':
         parts.pop()
         if cls in ('N', 'ADJ'):
@@ -298,17 +298,18 @@ def parse_header(header):
         verbum["abbreviation"] = True
     for f, field in zip(flags, ["age", "area", "geo", "frequency", "source"]):
         if f in dict_flags[field]:
-            verbum[field] = dict_flags[field][f]
-            verbum[field + "_code"] = f
+            verbum[field] = {"code": f, "value": dict_flags[field][f]}
         else:
-            raise UnknownFieldError(header, field + ' flag', f)
+            raise UnknownFieldError(header, field + ' code', f)
 
     def classify(*classifications):
         for field, lookup in classifications:
             if classifiers and classifiers[0] in lookup:
                 code = classifiers.pop(0)
-                verbum[field] = lookup[code]
-                verbum[field + "_code"] = code
+                if lookup is nth:
+                    verbum[field] = lookup[code]
+                else:
+                    verbum[field] = {"code": code, "value": lookup[code]}
         if classifiers:
             raise UnknownFieldError(header, classes[cls] + ' classifier',
                                             classifiers[0])
@@ -339,7 +340,6 @@ def parse_header(header):
             classify(("case", cases), ("number", numbers), ("gender", genders))
         else:
             classify(("declension", nth), ("gender", genders))
-            verbum.pop("declension_code", None)
 
     elif cls == 'V':
         if len(parts) == 1 and len(classifiers) in (7,8) and \
@@ -352,7 +352,6 @@ def parse_header(header):
                      ("number", numbers), ("type", verb_types))
         else:
             classify(("conjugation", nth), ("type", verb_types))
-            verbum.pop("conjugation_code", None)
 
     elif cls == 'ADJ':
         if len(parts) == 2:
