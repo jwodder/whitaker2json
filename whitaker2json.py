@@ -70,7 +70,7 @@ dict_flags = {
         "X": None,
     },
     "source": {
-        "A": 'SOURCE A',
+        "A": None,
         "B": 'C.H.Beeson, A Primer of Medieval Latin, 1925 (Bee)',
         "C": 'Charles Beard, Cassell\'s Latin Dictionary 1892 (CAS)',
         "D": 'J.N.Adams, Latin Sexual Vocabulary, 1982 (Sex)',
@@ -79,7 +79,7 @@ dict_flags = {
         "G": 'Gildersleeve + Lodge, Latin Grammar 1895 (G+L)',
         "H": 'Collatinus Dictionary by Yves Ouvrard',
         "I": 'Leverett, F.P., Lexicon of the Latin Language, Boston 1845',
-        "J": 'SOURCE J',
+        "J": None,
         "K": 'Calepinus Novus, modern Latin, by Guy Licoppe (Cal)',
         "L": 'Lewis, C.S., Elementary Latin Dictionary 1891',
         "M": 'Latham, Revised Medieval Word List, 1980',
