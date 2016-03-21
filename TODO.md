@@ -15,3 +15,7 @@
   confusion
 - Add fancy error checking & error messages for malformed inflected word
   entries
+- Replace `<FLAG>` and `<FLAG>_code` fields with a single field per flag that
+  maps to a dict with `code` and `name` (`value`?) fields?
+- Make a gh-pages site describing the formats of Words' datafiles, including
+  declension/conjugation variant numbers

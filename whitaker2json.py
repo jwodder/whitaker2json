@@ -283,9 +283,6 @@ def parse_header(header):
     if cls not in classes:
         raise UnknownFieldError(header, 'part of speech', cls)
     verbum = dict()
-    if cls == "PACK":
-        cls = "PRON"
-        verbum["PACK"] = True
     verbum["class"] = classes[cls]
     verbum["class_code"] = cls
     if len(parts) == 2 and parts[1] == 'undeclined':
@@ -423,7 +420,7 @@ def parse_header(header):
         verbum["distributive"] = distributive
         verbum["numeral adverb"] = [adv]
 
-    elif cls == 'PRON':
+    elif cls == 'PRON' or cls == 'PACK':
         if len(parts) == 1 and len(classifiers) == 5 and \
                 re.search(r'^\d+$', classifiers[0]):
             verbum["inflected"] = True
