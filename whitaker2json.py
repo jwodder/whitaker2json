@@ -333,7 +333,8 @@ def parse_header(header):
 
     if cls == 'N':
         if len(parts) == 1 and len(classifiers) == 5 and \
-                re.search(r'^\d+$', classifiers[0]):
+                re.search(r'^\d+$', classifiers[0]) and \
+                re.search(r'^\d+$', classifiers[1]):
             verbum["inflected"] = True
             verbum["declension"] = int(classifiers.pop(0))
             verbum["variant"] = int(classifiers.pop(0))
@@ -343,7 +344,9 @@ def parse_header(header):
 
     elif cls == 'V':
         if len(parts) == 1 and len(classifiers) in (7,8) and \
-                re.search(r'^\d+$', classifiers[0]):
+                re.search(r'^\d+$', classifiers[0]) and \
+                re.search(r'^\d+$', classifiers[1]) and \
+                re.search(r'^\d+$', classifiers[5]):
             verbum["inflected"] = True
             verbum["conjugation"] = int(classifiers.pop(0))
             verbum["variant"] = int(classifiers.pop(0))
@@ -421,7 +424,8 @@ def parse_header(header):
 
     elif cls == 'PRON' or cls == 'PACK':
         if len(parts) == 1 and len(classifiers) == 5 and \
-                re.search(r'^\d+$', classifiers[0]):
+                re.search(r'^\d+$', classifiers[0]) and \
+                re.search(r'^\d+$', classifiers[1]):
             verbum["inflected"] = True
             verbum["declension"] = int(classifiers.pop(0))
             verbum["variant"] = int(classifiers.pop(0))

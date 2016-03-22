@@ -13,8 +13,6 @@
 - Exit with a failure status if any lines were unparseable
 - Rename "inflectable" and "inflected" to something less likely to cause
   confusion
-- Add fancy error checking & error messages for malformed inflected word
-  entries
 - Make a gh-pages site describing the formats of Words' datafiles, including
   declension/conjugation variant numbers
 - Make "numeral adverb" a string instead of a list?
