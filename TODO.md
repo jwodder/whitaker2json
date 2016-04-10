@@ -1,7 +1,3 @@
-- Be able to handle all entries currently in `DICTPAGE.RAW`
-- Entries that are currently not handled correctly:
-    - `#colossicon  N ADJ`
-    - `#curotrophoe F ADJ`
 - Add the ability to convert `DICTLINE.GEN` to JSON
 - Write a README
 - Add a JSON Schema for the output format?
@@ -20,3 +16,4 @@
   into a single `"parts": {"positive": ..., "comparative": ..., "superlative":
   ...}` field?
     - Do the same for numbers?
+- Allow any letter as an area/geo/etc. flag with unknowns mapped to `null`?

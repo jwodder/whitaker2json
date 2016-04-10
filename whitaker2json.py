@@ -273,18 +273,23 @@ def whitaker(fp, error_file=None, quiet=False):
             yield verbum
 
 def parse_header(header):
-    m = re.search(r'^#(.+?)\s+(' + cls_rgx + r')\s+(.*?)\s+\[(\w{5})\] ::\s+$',
-                  header)
+    m = re.search(r'^#(.+?)\s+([A-Z]+)\s+(.*?)\s+\[(\w{5})\] ::\s+$', header)
     if not m:
         raise WhitakerError(header, 'unknown format')
     parts, cls, classifiers, flags = m.groups()
     parts = [p if p != '-' else None for p in parts.split(', ')]
     classifiers = classifiers.split()
+    verbum = dict()
+    if classifiers == ["ADJ"]:
+        # Special handling for "colossicon" and "curotrophoe":
+        try:
+            verbum["gender"] = genders[cls]
+        except KeyError:
+            raise UnknownFieldError(header, 'gender code', cls)
+        cls = classifiers.pop()
     if cls not in classes:
         raise UnknownFieldError(header, 'part of speech', cls)
-    verbum = {
-        "class": {"code": cls, "value": classes[cls]},
-    }
+    verbum["class"] = {"code": cls, "value": classes[cls]}
     if len(parts) == 2 and parts[1] == 'undeclined':
         parts.pop()
         if cls in ('N', 'ADJ'):
