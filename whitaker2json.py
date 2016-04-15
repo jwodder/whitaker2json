@@ -7,9 +7,14 @@ import codecs
 import itertools
 import json
 import re
-from   StringIO   import StringIO
 import sys
 import zipfile
+
+if sys.version_info[0] == 2:
+    from io       import open
+    from StringIO import StringIO
+else:
+    from io       import BytesIO as StringIO
 
 dict_flags = {
     "age": {
@@ -218,7 +223,7 @@ def main():
     parser.add_argument('-z', '--zip-url',
                         default='http://archives.nd.edu/whitaker/dictpage.zip')
     parser.add_argument('-Z', '--zip-path', default='DICTPAGE.RAW')
-    parser.add_argument('infile', type=argparse.FileType('r'), nargs='?')
+    parser.add_argument('infile', nargs='?')
     args = parser.parse_args()
     if args.infile is None:
         try:
@@ -229,10 +234,12 @@ def main():
         r = requests.get(args.zip_url)
         r.raise_for_status()
         fp = zipfile.ZipFile(StringIO(r.content), 'r').open(args.zip_path)
-    elif args.infile.name.lower().endswith('.zip'):
+    elif args.infile.lower().endswith('.zip'):
         fp = zipfile.ZipFile(args.infile, 'r').open(args.zip_path)
+    elif args.infile == '-':
+        fp = sys.stdin
     else:
-        fp = args.infile
+        fp = open(args.infile, 'rb')
     with codecs.getreader('utf-8' if args.utf8 else 'iso-8859-1')(fp) as verba:
         json.dump(list(whitaker(verba, args.error_file, args.quiet)),
                   args.outfile, sort_keys=True, indent=4, separators=(',',': '))

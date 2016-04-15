@@ -1,7 +1,6 @@
 - Add the ability to convert `DICTLINE.GEN` to JSON
 - Write a README
 - Add a JSON Schema for the output format?
-- Make sure the code is compatible with both Python 2 and Python 3
 - Find a better term for "parts"
 - Should the "(gen.)" in adjective headers be preserved somehow?
 - Add an option for specifying the maximum field width? (currently 24; used for
@@ -17,3 +16,4 @@
   ...}` field?
     - Do the same for numbers?
 - Allow any letter as an area/geo/etc. flag with unknowns mapped to `null`?
+- Use warnings for things currently written straight to stderr?
