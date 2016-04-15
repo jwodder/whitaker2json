@@ -112,8 +112,6 @@ classes = {
     "V": "verb",
 }
 
-cls_rgx = r'(?:' + '|'.join(classes.keys()) + ')'
-
 cases = {
     "NOM": "nominative",
     "GEN": "genitive",
