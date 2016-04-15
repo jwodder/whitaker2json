@@ -238,6 +238,8 @@ def main():
         fp = zipfile.ZipFile(args.infile, 'r').open(args.zip_path)
     elif args.infile == '-':
         fp = sys.stdin
+        if sys.version_info[0] >= 3:
+            fp = fp.buffer
     else:
         fp = open(args.infile, 'rb')
     with codecs.getreader('utf-8' if args.utf8 else 'iso-8859-1')(fp) as verba:
