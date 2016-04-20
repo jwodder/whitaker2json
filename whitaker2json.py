@@ -215,14 +215,19 @@ class UnknownFieldError(WhitakerError):
 
 def main():
     parser = argparse.ArgumentParser()
-    parser.add_argument('-E', '--error-file', type=argparse.FileType('w'))
+    parser.add_argument('-E', '--error-file', type=argparse.FileType('w'),
+                        help='Write unparseable lines to this file')
     parser.add_argument('-o', '--outfile', type=argparse.FileType('w'),
                         default=sys.stdout)
-    parser.add_argument('-q', '--quiet', action='store_true')
-    parser.add_argument('-U', '--utf8', action='store_true')
+    parser.add_argument('-q', '--quiet', action='store_true',
+                        help="Don't report unparsable lines")
+    parser.add_argument('-U', '--utf8', action='store_true',
+                        help='Assume the input is UTF-8 instead of Latin-1')
     parser.add_argument('-z', '--zip-url',
-                        default='http://archives.nd.edu/whitaker/dictpage.zip')
-    parser.add_argument('-Z', '--zip-path', default='DICTPAGE.RAW')
+                        default='http://archives.nd.edu/whitaker/dictpage.zip',
+                        help='URL from which to download the zipfile')
+    parser.add_argument('-Z', '--zip-path', default='DICTPAGE.RAW',
+                        help='Location of the input file in the zipfile')
     parser.add_argument('infile', nargs='?')
     args = parser.parse_args()
     if args.infile is None:

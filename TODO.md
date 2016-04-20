@@ -1,7 +1,7 @@
 - Add the ability to convert `DICTLINE.GEN` to JSON
 - Write a README
 - Add a JSON Schema for the output format?
-- Find a better term for "parts"
+- Find a better term for "parts" (`"base_forms"`?)
 - Should the "(gen.)" in adjective headers be preserved somehow?
 - Add an option for specifying the maximum field width? (currently 24; used for
   determining when abbreviated endings may have been truncated)
