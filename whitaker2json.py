@@ -460,7 +460,7 @@ def parse_header(header):
         raise UnknownFieldError(header, classes[cls] + ' classifier',
                                 classifiers[0])
 
-    verbum["parts"] = parts
+    verbum["base_forms"] = parts
     return verbum
 
 if __name__ == '__main__':
