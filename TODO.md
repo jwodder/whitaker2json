@@ -20,4 +20,3 @@
       into a single `"parts": {"positive": ..., "comparative": ...,
       "superlative": ...}` field?
         - Do the same for numbers?
-    - Make "numeral adverb" a string instead of a list?
