@@ -291,7 +291,11 @@ def parse_header(header):
     parts, cls, classifiers, flags = m.groups()
     parts = [p if p != '-' else None for p in parts.split(', ')]
     classifiers = classifiers.split()
-    verbum = dict()
+    verbum = {
+        "abbreviation": False,
+        "uninflectable": False,
+        "inflected": False,
+    }
     if classifiers == ["ADJ"]:
         # Special handling for "colossicon" and "curotrophoe":
         try:
