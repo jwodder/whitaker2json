@@ -15,8 +15,7 @@
     - Give each nontrivial word named fields for each element of `base_forms`
       (Keep `base_forms`, though)
         - This will allow preserving the "(gen.)" in adjective headers
-        - Include comparatives etc. in `base_forms`?
-    - For adjectives & adverbs, merge "parts", "comparative", and "superlative"
-      into a single `"parts": {"positive": ..., "comparative": ...,
-      "superlative": ...}` field?
-        - Do the same for numbers?
+        - Include comparatives etc. in `base_forms`, either as one long list or
+          as a `"base_forms": {"positive": ..., "comparative": ...,
+          "superlative": ...}` field?
+            - Do the same for numbers

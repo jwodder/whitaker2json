@@ -62,7 +62,7 @@ dict_flags = {
         "U": 'Eastern Europe',
         "X": None,
     },
-    "frequency": {
+    "freq": {
         "A": 'very freq',
         "B": 'frequent',
         "C": 'common',
@@ -313,7 +313,7 @@ def parse_header(header):
     if len(parts) == 2 and parts[1] == 'abb.':
         parts.pop()
         verbum["abbreviation"] = True
-    for f, field in zip(flags, ["age", "area", "geo", "frequency", "source"]):
+    for f, field in zip(flags, ["age", "area", "geo", "freq", "source"]):
         if f in dict_flags[field]:
             verbum[field] = {"code": f, "value": dict_flags[field][f]}
         else:
