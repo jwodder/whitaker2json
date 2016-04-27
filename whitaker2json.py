@@ -304,12 +304,7 @@ def parse_header(header):
     verbum["class"] = {"code": cls, "value": classes[cls]}
     if len(parts) == 2 and parts[1] == 'undeclined':
         parts.pop()
-        if cls in ('N', 'ADJ'):
-            verbum["declinable"] = False
-        elif cls == 'V':
-            verbum["conjugatable"] = False
-        else:
-            verbum["inflectable"] = False
+        verbum["uninflectable"] = True
     if len(parts) == 2 and parts[1] == 'abb.':
         parts.pop()
         verbum["abbreviation"] = True

@@ -10,7 +10,7 @@
 - Use warnings for things currently written straight to stderr?
 
 - Improve output format:
-    - Rename "inflectable" and "inflected" to something less likely to cause
+    - Rename "uninflectable" and "inflected" to something less likely to cause
       confusion
     - Give each nontrivial word named fields for each element of `base_forms`
       (Keep `base_forms`, though)
