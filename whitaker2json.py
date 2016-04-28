@@ -436,7 +436,7 @@ def parse_header(header):
             distributive = explode(distributive, 'i', 'ae', 'a',
                                    or_bust='distributive')
         verbum["distributive"] = distributive
-        verbum["numeral adverb"] = adv
+        verbum["adverb"] = adv
 
     elif cls == 'PRON' or cls == 'PACK':
         if len(parts) == 1 and len(classifiers) == 5 and \
