@@ -11,13 +11,13 @@ feature (see below).
 Usage
 =====
 
-    python whitaker2json.py [-E|--error-file <file>]
-                            [-o|--outfile <file>]
-                            [-q|--quiet]
-                            [-U|--utf8]
-                            [-z|--zip-url <URL>]
-                            [-Z|--zip-path <path>]
-                            [<infile>]
+    whitaker2json.py [-E|--error-file <file>]
+                     [-o|--outfile <file>]
+                     [-q|--quiet]
+                     [-U|--utf8]
+                     [-z|--zip-url <URL>]
+                     [-Z|--zip-path <path>]
+                     [<infile>]
 
 Input to the script must be either `DICTPAGE.RAW` or another sequence of lines
 in the same format.  `whitaker2json.py` can acquire its input in three ways:
