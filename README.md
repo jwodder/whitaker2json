@@ -129,7 +129,7 @@ All entries have the following fields:
   information
 - `base_forms` — a list of strings giving the base forms of the word (for
   verbs, the principal parts; for nouns, the nominative & genitive; etc.)
-- `class` — a code-value object for the word's part of speech
+- `class` — a code-value object for the word's part of speech:
 
     `code` | `value`
     ------ | ----------------
@@ -145,8 +145,8 @@ All entries have the following fields:
     V      | verb
 
 - `definition` — a string of semicolon-separated definitions of the word
-- `frequency` — a code-value object for how frequently the word was used;
-  see <http://archives.nd.edu/whitaker/wordsdoc.htm#FREQ> for more information
+- `freq` — a code-value object for how frequently the word was used; see
+  <http://archives.nd.edu/whitaker/wordsdoc.htm#FREQ> for more information
 - `geo` — a code-value object for the region in which or about which the word
   was used; see <http://archives.nd.edu/whitaker/wordsdoc.htm#GEO> for more
   information
