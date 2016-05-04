@@ -383,14 +383,16 @@ def parse_header(header):
             elif p0 is not None or p1 is not None:
                 raise WhitakerError(header, 'unknown adjective format')
         elif len(parts) == 3 and parts[1] == '(gen.)':
-            del parts[1]
+            verbum["genitive"] = parts[2]
+            parts = [parts[0]]
         elif len(parts) == 4:
             part1, part2, comparative, superlative = parts
             ps = explode(part2, 'a', 'um') or explode(part2, 'is', 'e')
             if ps is not None:
                 parts = [part1] + ps
             elif part2.endswith(' (gen.)'):
-                parts = [part1, part2[:-7]]
+                verbum["genitive"] = part2[:-7]
+                parts = [part1]
             else:
                 parts = [part1, part2]
             if comparative is not None:

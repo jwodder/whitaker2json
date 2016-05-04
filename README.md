@@ -254,6 +254,10 @@ Adjective entries may have zero or more of the following fields:
   degree of the adjective
 - `gender` — for single-gender adjectives, the gender in which the adjective is
   used; see the table above for possible values
+- `genitive` — For adjectives that take the same form in all genders in the
+  nominative singular, the `base_forms` field will contain only a single
+  element (the nominative singular), and the `genitive` field will contain the
+  genitive singular.
 - `gen_ius` — true if the adjective takes the ending `-ius` in the genitive
   singular
 - `superlative` — a list of strings giving the base forms of the superlative
