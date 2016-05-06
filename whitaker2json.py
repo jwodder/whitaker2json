@@ -452,7 +452,7 @@ def parse_header(header):
             classify(("type", pronoun_types))
             if len(parts) == 1 and parts[0].endswith(' (GEN)'):
                 parts[0] = parts[0][:-6]
-                verbum["genitive"] = True
+                verbum["is_genitive"] = True
 
     elif len(parts) != 1:
         raise WhitakerError(header, 'unexpected number of principal parts')

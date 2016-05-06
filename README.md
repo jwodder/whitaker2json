@@ -302,7 +302,7 @@ This script treats them the same way it treats pronouns.
 
 Pronoun/PACKON entries may have zero or more of the following fields:
 
-- `genitive` — true if the pronoun is genitive
+- `is_genitive` — true if the pronoun is genitive
 
 - `type` — a code-value object indicating the type of pronoun:
 
