@@ -252,8 +252,8 @@ Adjective entries may have zero or more of the following fields:
 
 - `comparative` — a list of strings giving the base forms of the comparative
   degree of the adjective
-- `gender` — for single-gender adjectives, the gender in which the adjective is
-  used; see the table above for possible values
+- `gender` — for single-gender adjectives, a code-value object for the gender
+  in which the adjective is used; see the table above for possible values
 - `genitive` — For adjectives that take the same form in all genders in the
   nominative singular, the `base_forms` field will contain only a single
   element (the nominative singular), and the `genitive` field will contain the

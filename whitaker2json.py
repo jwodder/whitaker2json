@@ -299,7 +299,7 @@ def parse_header(header):
     if classifiers == ["ADJ"]:
         # Special handling for "colossicon" and "curotrophoe":
         try:
-            verbum["gender"] = genders[cls]
+            verbum["gender"] = {"code": cls, "value": genders[cls]}
         except KeyError:
             raise UnknownFieldError(header, 'gender code', cls)
         cls = classifiers.pop()
