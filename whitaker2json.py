@@ -200,17 +200,21 @@ class WhitakerError(ValueError):
     def __init__(self, header, msg):
         self.header = header
         self.msg = msg
-        super(WhitakerError, self).__init__('Could not parse header {!r}: {}'\
-                                            .format(header, msg))
+        super(WhitakerError, self).__init__(header, msg)
+
+    def __str__(self):
+        return 'Could not parse header {0.header!r}: {0.msg}'.format(self)
+
 
 class UnknownFieldError(WhitakerError):
     def __init__(self, header, unk_type, unk_value):
         self.header = header
         self.unk_type = unk_type
         self.unk_value = unk_value
-        super(UnknownFieldError, self).__init__(header, 'unknown {}: {!r}'\
-                                                        .format(unk_type,
-                                                                unk_value))
+        super(UnknownFieldError, self).__init__(
+            header,
+            'unknown {}: {!r}'.format(unk_type, unk_value),
+        )
 
 
 def main():
