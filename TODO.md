@@ -7,6 +7,8 @@
 - Use warnings for things currently written straight to stderr?
 
 - Improve output format:
-    - Rename "uninflectable" and "inflected" to something less likely to cause
-      confusion
+    - Rename "uninflectable" (to "invariable"?) and "inflected" to something
+      less likely to cause confusion
+    - Give each nontrivial word named fields for each element of `base_forms`?
+      (Keep `base_forms`, though)
     - Always include all of the fields defined for a class in its entries?
